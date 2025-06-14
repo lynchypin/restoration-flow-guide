@@ -13,11 +13,23 @@ const tree = {
               answers: [
                 {
                   text: "Yes",
-                  end: "Contact PagerDuty Support and request restoration. Note: Restoration may not be possible if a new user with the same email exists, or if your account is at its user license limit."
+                  next: {
+                    question: "Note: Restoration may not be possible if a new user with the same email exists, or if your account is at its user license limit. Would you like to proceed?",
+                    answers: [
+                      {
+                        text: "Yes",
+                        end: "Contact PagerDuty Support and request restoration. Gather the deleted user's name or email address."
+                      },
+                      {
+                        text: "No",
+                        end: "End of flow."
+                      }
+                    ]
+                  }
                 },
                 {
                   text: "No",
-                  end: "Restoration is not possible after 10 days."
+                  end: "Restoration is not possible after 10 days. Share your feedback if you'd like to see self-service restoration features!"
                 }
               ]
             }
@@ -36,7 +48,7 @@ const tree = {
         answers: [
           {
             text: "Yes",
-            end: "Restoration may not be possible. Contact Support to check if engineering assistance is an option (time-sensitive, usually within 24 hours)."
+            end: "Restoration may not be possible. Contact PagerDuty Support to check if engineering assistance is an option (note: time-sensitive, usually within 24 hours)."
           },
           {
             text: "No",
@@ -68,7 +80,19 @@ const tree = {
         answers: [
           {
             text: "Yes",
-            end: "Contact PagerDuty Support with details and the approximate deletion date."
+            next: {
+              question: "Was it deleted within the last 10 days?",
+              answers: [
+                {
+                  text: "Yes",
+                  end: "Contact PagerDuty Support as soon as possible for restoration."
+                },
+                {
+                  text: "No",
+                  end: "Restoration is not possible after 10 days."
+                }
+              ]
+            }
           },
           {
             text: "No",
@@ -79,7 +103,11 @@ const tree = {
     },
     {
       text: "Something else (schedule, escalation policy, team, extension, account, etc.)",
-      end: "Most of these items cannot be restored once deleted. Our Support team can guide you through rebuilding users, services, or other objects."
+      end: "Most of these items cannot be restored once deleted. Our Support team can guide you through rebuilding users, services, or other objects. Try to gather as much information as possible, then contact Support for help."
+    },
+    {
+      text: "Not sure / Need help",
+      end: "Contact PagerDuty Support with as much detail as possible. We're here to help you find the best solution!"
     }
   ]
 };
